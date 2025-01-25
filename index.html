@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>747 Lucky One</title>
+    <link rel="icon" type="image/jpeg" href="logo.jfif">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, rgb(25, 43, 74) 99%, rgb(212, 175, 55) 1%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centers the content vertically */
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            background: linear-gradient(to bottom, rgb(25, 43, 74) 99%, rgb(212, 175, 55) 1%);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        header img {
+            height: 50px;
+            width: auto;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: rgb(212, 175, 55);
+        }
+
+        .portal-selection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            text-align: center;
+        }
+
+        .portal-label {
+            font-family: "Sitka", serif;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .portal-selection button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .portal-selection button img {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .portal-selection button img:hover {
+            transform: scale(1.05);
+        }
+
+        .portal-panel, .contact-panel, .about-panel {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            color: white;
+            width: 80%;
+            max-width: 400px;
+            font-size: 1.1rem;
+        }
+
+        .about-panel {
+            width: 70%;
+            max-width: 700px;
+        }
+
+        .portal-panel.active, .contact-panel.active, .about-panel.active {
+            display: block;
+        }
+
+        .portal-panel h1, .contact-panel h1, .about-panel h1 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: rgb(212, 175, 55);
+        }
+
+        .contact-panel p, .about-panel p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .portal-panel button, .contact-panel button, .about-panel button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgb(212, 175, 55);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .portal-panel button:hover, .contact-panel button:hover, .about-panel button:hover {
+            background: rgb(25, 43, 74);
+        }
+
+        .contact-panel .contact-btn, .about-panel .about-btn {
+            background: rgb(25, 43, 74);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .contact-panel .contact-btn:hover, .about-panel .about-btn:hover {
+            background: rgb(212, 175, 55);
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const playerButton = document.querySelector('#playerPortal');
+            const agentButton = document.querySelector('#agentPortal');
+            const contactButton = document.querySelector('#contactButton');
+            const aboutButton = document.querySelector('#aboutButton');
+            const portalPanel = document.querySelector('.portal-panel');
+            const contactPanel = document.querySelector('.contact-panel');
+            const aboutPanel = document.querySelector('.about-panel');
+            const portalSelection = document.querySelector('.portal-selection');
+            const returnButton = document.createElement('button');
+            const homeButton = document.querySelector('#homeButton');
+
+            returnButton.textContent = 'Return to Home';
+            returnButton.addEventListener('click', () => {
+                portalPanel.classList.remove('active');
+                contactPanel.classList.remove('active');
+                aboutPanel.classList.remove('active');
+                portalSelection.style.display = 'flex';
+            });
+
+            homeButton.addEventListener('click', () => {
+                portalPanel.classList.remove('active');
+                contactPanel.classList.remove('active');
+                aboutPanel.classList.remove('active');
+                portalSelection.style.display = 'flex';
+            });
+
+            playerButton.addEventListener('click', () => {
+                portalSelection.style.display = 'none';
+                portalPanel.classList.add('active');
+                portalPanel.innerHTML = `
+                    <h1>Welcome to Player Portal</h1>
+                    <button class="contact-btn" onclick="window.location.href='https://747-1.live/'">Redirect Me</button>
+                `;
+                portalPanel.appendChild(returnButton);
+            });
+
+            agentButton.addEventListener('click', () => {
+                portalSelection.style.display = 'none';
+                portalPanel.classList.add('active');
+                portalPanel.innerHTML = `
+                    <h1>Welcome to Agent Portal</h1>
+                    <button class="contact-btn" onclick="window.location.href='https://agents.747-1.live/'">Redirect Me</button>
+                `;
+                portalPanel.appendChild(returnButton);
+            });
+
+            contactButton.addEventListener('click', () => {
+                portalPanel.classList.remove('active');
+                aboutPanel.classList.remove('active');
+                portalSelection.style.display = 'none';
+                contactPanel.classList.add('active');
+                contactPanel.innerHTML = `
+                    <h1>Contact Information</h1>
+                    <p>Facebook Name: CM Pplay</p>
+                    <p>Agent Status: City Manager</p>
+                    <p>Email: cmplay@example.com</p>
+                    <button class="contact-btn" onclick="window.location.href='https://www.facebook.com/MjSanPablo'">Contact Me</button>
+                    <button id="returnHomeContact">Return to Home</button>
+                `;
+                document.querySelector('#returnHomeContact').addEventListener('click', () => {
+                    contactPanel.classList.remove('active');
+                    portalSelection.style.display = 'flex';
+                });
+            });
+
+            aboutButton.addEventListener('click', () => {
+                portalPanel.classList.remove('active');
+                contactPanel.classList.remove('active');
+                portalSelection.style.display = 'none';
+                aboutPanel.classList.add('active');
+                aboutPanel.innerHTML = `
+                    <h1>About Us</h1>
+                    <img src="about.jpg" alt="About Image" style="width:100%; max-width: 1550px; border-radius: 8px;">
+                `;
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo">
+        <nav>
+            <a id="homeButton" href="#">Home</a>
+            <a id="aboutButton" href="#">About</a>
+            <a id="contactButton" href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="portal-selection">
+        <div>
+            <div class="portal-label">Player Portal</div>
+            <button id="playerPortal">
+                <img src="logo.jfif" alt="Player Portal" style="width: 200px; height: auto;">
+            </button>
+        </div>
+
+        <div>
+            <div class="portal-label">Agent Portal</div>
+            <button id="agentPortal">
+                <img src="logo.jfif" alt="Agent Portal" style="width: 200px; height: auto;">
+            </button>
+        </div>
+    </div>
+
+    <div class="contact-panel"></div>
+    <div class="about-panel"></div>
+    <div class="portal-panel"></div>
+</body>
+</html>
